@@ -16,8 +16,8 @@ return {
 				end,
 			},
 			sources = {
+				{ name = "nvim_lsp" }, -- its suck in js when luasnip is first
 				{ name = "luasnip" },
-				{ name = "nvim_lsp" },
 				{ name = "nvim_lua" },
 				{ name = "path" },
 				{ name = "buffer" },
