@@ -20,6 +20,10 @@ return {
       lspconfig.vtsls.setup({ capabilities = capabilities })
     end,
   },
+  -- {
+  -- https://www.reddit.com/r/neovim/comments/1i6hd1n/path_aliases_not_working_with_ts_ls_autocomplete/
+  -- ...
+  -- },
   {
     -- LS from tool
     "nvimtools/none-ls.nvim",
