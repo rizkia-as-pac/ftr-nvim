@@ -14,6 +14,13 @@ vim.keymap.set("n", "J", "mzJ`z")
 
 -- vim.keymap.set("n", "<C-u>", "<C-u>zz") -- disable to prevent weird motion when use mini.animate plugin
 -- vim.keymap.set("n", "<C-d>", "<C-d>zz") -- disable to prevent weird motion when use mini.animate plugin
+vim.keymap.set({ "n", "v" }, "}", function ()
+  vim.cmd("normal 10k")
+end, {desc = "up 10 line"})
+
+vim.keymap.set({ "n", "v" }, "{", function ()
+  vim.cmd("normal 10j")
+end, {desc = "down 10 line"})
 
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
@@ -43,7 +50,19 @@ vim.keymap.set("n", "<leader>ud", function()
   vim.cmd("close")
 end, { desc = "Delete window" })
 
-vim.keymap.set("n", "<leader>w", "<c-w>", { desc = "Move to next window" })
+-- WINDOW
+-- vim.keymap.set("n", "<leader>w", "<c-w>", { desc = "Move to next window" })
+-- vim.keymap.set("n", "<leader>h", "<c-w>", { desc = "Move to next TMUX window (tmux session only)" })
+vim.keymap.set("n", "<leader>w", function()
+  local tmux = os.getenv("TMUX")
+  if tmux then
+    -- Dalam sesi tmux, kirim perintah pindah panel ke kiri
+    vim.fn.system("tmux select-pane -L")
+  else
+    -- Jika tidak dalam tmux, pakai default vim move
+    vim.cmd("wincmd w")
+  end
+end, { desc = "Move left (vim or tmux)" })
 
 -- vim.keymap.set("n", "<leader>u+", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
 -- vim.keymap.set("n", "<leader>u-", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
@@ -68,9 +87,11 @@ vim.keymap.set("n", "<leader>mlc", function()
   vim.cmd("checkhealth vim.lsp")
 end, { desc = "Check LSP health" })
 
-vim.keymap.set("n", "<leader>ca", function()
-  vim.lsp.buf.code_action()
-end, { desc = "Code action" })
+-- use fzf lua code action instead
+-- entah kenapa tiba tiba code action tidak muncul melalui floating window
+-- vim.keymap.set("n", "<leader>ca", function()
+--   vim.lsp.buf.code_action()
+-- end, { desc = "Code action" })
 
 
 -- █▀█ ▄▀█ █▀▀ █▀▄▀█ ▄▀█ █▄░█ █▀
