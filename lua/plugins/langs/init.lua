@@ -3,5 +3,6 @@ return {
 	require("plugins.langs.python"),
 	require("plugins.langs.golang"),
 	require("plugins.langs.typescript"),
+	require("plugins.langs.php"),
 	-- require("plugins.langs.zig"),
 }
