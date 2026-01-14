@@ -4,5 +4,6 @@ return {
 	require("plugins.langs.golang"),
 	require("plugins.langs.typescript"),
 	require("plugins.langs.php"),
+	require("plugins.langs.sql"),
 	-- require("plugins.langs.zig"),
 }
