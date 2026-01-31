@@ -107,6 +107,22 @@ vim.keymap.set("n", "<leader>mh", "<cmd>exe 'edit' stdpath('config').'/my-nvim-n
 
 
 vim.keymap.set("n", "<leader>fb", "<cmd>b#<cr>", { desc = "Back to previous buffer" })
+vim.keymap.set("n", "<leader>fy", function()
+  local path = vim.fn.expand("%")
+  vim.fn.setreg("+", path)
+  print("Copied relative: " .. path)
+end, { desc = "Copy relative file path" })
+vim.keymap.set("n", "<leader>fY", function()
+  local path = vim.api.nvim_buf_get_name(0)
+  if path == "" then
+    print("No file path")
+    return
+  end
+  vim.fn.setreg("+", path)
+  print("Copied: " .. path)
+end, { desc = "Copy current file path" })
+
+
 
 vim.keymap.set('n', '<BS>', 'X', { noremap = true })                                                      -- backspace become => X (delete char behind cursor)
 vim.keymap.set('n', 'X', function() vim.diagnostic.open_float() end, { desc = 'Show diagnostics float' }) -- just like shift K but for diagnostics
