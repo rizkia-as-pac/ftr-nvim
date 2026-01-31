@@ -1,11 +1,14 @@
 return {
   {
-    "folke/tokyonight.nvim",
-    lazy = true,
-    opts = {
-      style = "moon",
-      integrations = { blink_cmp = true },
-    },
+    'projekt0n/github-nvim-theme',
+    name = 'github-theme',
+    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
+    config = function()
+      require('github-theme').setup({
+        -- ...
+      })
+    end,
   },
   {
     "catppuccin/nvim",
@@ -17,7 +20,6 @@ return {
         { desc = "colorscheme config" })
 
       require("catppuccin").setup({
-        -- flavour = "latte",
         flavour = "macchiato",
         color_overrides = {
           macchiato = {
@@ -32,16 +34,7 @@ return {
             mantle = "#181825",
             crust = "#11111b",
           },
-          latte = {
-            green = "#158995", -- blueish green  # 1
-            -- green = "#006600", -- darker green #2
-            -- green = "#016342", -- blueish green #4
-            -- green = "#098baa", -- blueish green #3
-            base = "#e4e4e4",
-            mantle = "#d7d7d7",
-          },
         },
-        -- ref : catppuccin/nvim/lua/catppuccin/palettes/latte.lua
       })
     end,
   },

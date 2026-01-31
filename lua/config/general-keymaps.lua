@@ -58,8 +58,6 @@ vim.keymap.set("n", "<leader>mlc", function()
   vim.cmd("checkhealth vim.lsp")
 end, { desc = "Check LSP health" })
 
--- █▀█ ▄▀█ █▀▀ █▀▄▀█ ▄▀█ █▄░█ █▀
--- █▀▀ █▀█ █▄▄ █░▀░█ █▀█ █░▀█ ▄█
 -- folke / lazy.nvim
 vim.keymap.set("n", "<leader>mpl", function()
   vim.cmd("Lazy")
@@ -72,8 +70,6 @@ end, { desc = "Open Mason" })
 
 -- nvim-treesitter / nvim-treesitter
 vim.keymap.set("n", "<leader>mpt", "<cmd>TSInstallInfo<CR>", { desc = "Open Treesitter PM" })
--- ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄
-
 
 -- "nvimtools/none-ls",
 vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { desc = "vim.lsp.buf.format/none-ls format" })

@@ -15,6 +15,7 @@ return {
       desc = "fzf-lua config"
     },
 
+    { "<leader>fj",  "<cmd>FzfLua buffers<cr>",               desc = "FzfLua buffers", },
     { "<leader>ff",  "<cmd>FzfLua files<cr>",                 desc = "FzfLua files", },
     { "<leader>fG",  "<cmd>Telescope live_grep<cr>",          desc = "tele live grep" },
     { "<leader>fg",  "<cmd>FzfLua live_grep_native<cr>",      desc = "FzfLua live_grep_native" }, -- https://github.com/ibhagwan/fzf-lua/wiki#grep-vs-live-grep
@@ -73,18 +74,18 @@ return {
         },
       },
       -- files = {
-        -- Gunakan find dan abaikan .git dan node_modules
-        -- find_opts =
-        -- [[-type f \! -path '*/.git/*' \! -path '*/node_modules/*' -path '*/src-tauri/gen/*' -path '*/src-tauri/target/*']],
+      -- Gunakan find dan abaikan .git dan node_modules
+      -- find_opts =
+      -- [[-type f \! -path '*/.git/*' \! -path '*/node_modules/*' -path '*/src-tauri/gen/*' -path '*/src-tauri/target/*']],
 
-        -- Gunakan ripgrep dan abaikan .git dan node_modules
-        -- rg_opts   =
-        -- [[--color=never --hidden --files -g "!.git" -g "!node_modules" -g "!src-tauri/gen" -g "!src-tauri/target"]],
+      -- Gunakan ripgrep dan abaikan .git dan node_modules
+      -- rg_opts   =
+      -- [[--color=never --hidden --files -g "!.git" -g "!node_modules" -g "!src-tauri/gen" -g "!src-tauri/target"]],
 
-        -- Gunakan fd dan abaikan .git dan node_modules
-        -- fd_opts   = [[--color=never --hidden --type f --type l --exclude .git --exclude node_modules --exclude src-tauri/gen/android/buildSrc --exclude src-tauri/gen/android.bak/buildSrc --exclude src-tauri/target]], -- kayak cuma ini yg work
-        -- fd_opts   =
-        -- [[--color=never --hidden --type f --type l --exclude .git --exclude node_modules --exclude src-tauri/gen --exclude src-tauri/target]], -- kayak cuma ini yg work
+      -- Gunakan fd dan abaikan .git dan node_modules
+      -- fd_opts   = [[--color=never --hidden --type f --type l --exclude .git --exclude node_modules --exclude src-tauri/gen/android/buildSrc --exclude src-tauri/gen/android.bak/buildSrc --exclude src-tauri/target]], -- kayak cuma ini yg work
+      -- fd_opts   =
+      -- [[--color=never --hidden --type f --type l --exclude .git --exclude node_modules --exclude src-tauri/gen --exclude src-tauri/target]], -- kayak cuma ini yg work
       -- },
     }
   end

@@ -1,9 +1,10 @@
+-- Set colorscheme
+vim.cmd.colorscheme("catppuccin")
+-- vim.cmd('colorscheme github_light_tritanopia') -- the best from gh -- also the best light theme
+
 vim.opt.wrap = true
 vim.opt.winbar = "%=%m %f" -- winbar pada upper right buffer
 vim.o.scrolloff = 15
--- Set colorscheme
--- vim.cmd.colorscheme("tokyonight"); vim.o.background = "dark"
-vim.cmd.colorscheme("catppuccin")
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
