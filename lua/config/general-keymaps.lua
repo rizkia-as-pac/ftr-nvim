@@ -3,8 +3,11 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
-
-vim.keymap.set("n", "<leader>s", function() vim.cmd('w') end) -- just for some convenion
+-- change j and k from moving between logical lines to visual lines
+vim.keymap.set('n', 'j', 'gj', { noremap = true, silent = true })
+vim.keymap.set('n', 'k', 'gk', { noremap = true, silent = true })
+vim.keymap.set('v', 'j', 'gj', { noremap = true, silent = true })
+vim.keymap.set('v', 'k', 'gk', { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>t", vim.cmd.Ex)
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -43,38 +46,18 @@ vim.keymap.set("n", "<leader>ud", function()
   vim.cmd("close")
 end, { desc = "Delete window" })
 
-vim.keymap.set("n", "<leader>w", "<c-w>", { desc = "Move to next window" })
 
--- vim.keymap.set("n", "<leader>u+", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
--- vim.keymap.set("n", "<leader>u-", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
-vim.keymap.set("n", "<leader>uj", "<cmd>vertical resize -50<cr>", { desc = "Decrease window width by 50col" })
-vim.keymap.set("n", "<leader>uk", "<cmd>vertical resize +50<cr>", { desc = "Increase window width by 50col" })
-vim.keymap.set("n", "<leader>un", "<cmd>wincmd =<cr>", { desc = "Reset window width to normal" })
-
--- vim.keymap.set(
---   "n",
---   "<leader>sx",
---   require("telescope.builtin").resume,
---   { noremap = true, silent = true, desc = "resume" }
--- )
-
---
--- QUICK FIX LOCAL AND GLOBAL
--- vim.keymap.set("n", "<leader>xx", "<cmd>lopen<cr>", { desc = "Location List (local to current window)" }) -- use telescope instead
--- vim.keymap.set("n", "<leader>xg", "<cmd>copen<cr>", { desc = "Quickfix List (global)" }) -- use telescope instead
+vim.keymap.set("n", "<leader>u<Down>", "<cmd>resize -10<cr>", { desc = "Decrease window height" })
+vim.keymap.set("n", "<leader>u<Up>", "<cmd>resize +10<cr>", { desc = "Increase window height" })
+vim.keymap.set("n", "<leader>u<Left>", "<cmd>vertical resize -50<cr>", { desc = "Decrease window width" })
+vim.keymap.set("n", "<leader>u<Right>", "<cmd>vertical resize +50<cr>", { desc = "Increase window width" })
+vim.keymap.set("n", "<leader>un", "<cmd>wincmd =<cr>", { desc = "Reset window sizes" })
 
 -- "neovim/nvim-lspconfig",
 vim.keymap.set("n", "<leader>mlc", function()
   vim.cmd("checkhealth vim.lsp")
 end, { desc = "Check LSP health" })
 
-vim.keymap.set("n", "<leader>ca", function()
-  vim.lsp.buf.code_action()
-end, { desc = "Code action" })
-
-
--- █▀█ ▄▀█ █▀▀ █▀▄▀█ ▄▀█ █▄░█ █▀
--- █▀▀ █▀█ █▄▄ █░▀░█ █▀█ █░▀█ ▄█
 -- folke / lazy.nvim
 vim.keymap.set("n", "<leader>mpl", function()
   vim.cmd("Lazy")
@@ -87,8 +70,6 @@ end, { desc = "Open Mason" })
 
 -- nvim-treesitter / nvim-treesitter
 vim.keymap.set("n", "<leader>mpt", "<cmd>TSInstallInfo<CR>", { desc = "Open Treesitter PM" })
--- ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄
-
 
 -- "nvimtools/none-ls",
 vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { desc = "vim.lsp.buf.format/none-ls format" })
@@ -122,6 +103,27 @@ vim.keymap.set("n", "<leader>mh", "<cmd>exe 'edit' stdpath('config').'/my-nvim-n
 
 
 vim.keymap.set("n", "<leader>fb", "<cmd>b#<cr>", { desc = "Back to previous buffer" })
+vim.keymap.set("n", "<leader>fy", function()
+  local path = vim.fn.expand("%")
+  vim.fn.setreg("+", path)
+  print("Copied relative: " .. path)
+end, { desc = "Copy relative file path" })
+vim.keymap.set("n", "<leader>fY", function()
+  local path = vim.api.nvim_buf_get_name(0)
+  if path == "" then
+    print("No file path")
+    return
+  end
+  vim.fn.setreg("+", path)
+  print("Copied: " .. path)
+end, { desc = "Copy current file path" })
+
+
+
+vim.keymap.set('n', '<BS>', 'X', { noremap = true })                                                      -- backspace become => X (delete char behind cursor)
+vim.keymap.set('n', 'X', function() vim.diagnostic.open_float() end, { desc = 'Show diagnostics float' }) -- just like shift K but for diagnostics
+
+
 
 -- SAVE FOR LATER
 
@@ -139,3 +141,36 @@ vim.keymap.set("n", "<leader>fb", "<cmd>b#<cr>", { desc = "Back to previous buff
 -- map("v", "<a-k>", ":<c-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "move up" })
 -- map("v", "<a-k>", ":<c-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "move up" })
 -- map("v", "<a-k>", ":<c-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "move up" })
+-- vim.keymap.set("n", "<leader>s", function() vim.cmd('w') end) -- just for some convenion for saving file
+
+-- WINDOW
+-- vim.keymap.set("n", "<leader>w", "<c-w>", { desc = "Move to next window" })
+-- vim.keymap.set("n", "<leader>h", "<c-w>", { desc = "Move to next TMUX window (tmux session only)" })
+-- vim.keymap.set("n", "<leader>w", function()
+--   local tmux = os.getenv("TMUX")
+--   if tmux then
+--     -- Dalam sesi tmux, kirim perintah pindah panel ke kiri
+--     vim.fn.system("tmux select-pane -L")
+--   else
+--     -- Jika tidak dalam tmux, pakai default vim move
+--     vim.cmd("wincmd w")
+--   end
+-- end, { desc = "Move left (vim or tmux)" })
+
+-- vim.keymap.set(
+--   "n",
+--   "<leader>sx",
+--   require("telescope.builtin").resume,
+--   { noremap = true, silent = true, desc = "resume" }
+-- )
+
+--
+-- QUICK FIX LOCAL AND GLOBAL
+-- vim.keymap.set("n", "<leader>xx", "<cmd>lopen<cr>", { desc = "Location List (local to current window)" }) -- use telescope instead
+-- vim.keymap.set("n", "<leader>xg", "<cmd>copen<cr>", { desc = "Quickfix List (global)" }) -- use telescope instead
+
+-- use fzf lua code action instead
+-- entah kenapa tiba tiba code action tidak muncul melalui floating window
+-- vim.keymap.set("n", "<leader>ca", function()
+--   vim.lsp.buf.code_action()
+-- end, { desc = "Code action" })

@@ -22,6 +22,7 @@ return {
 			local lspconfig = require("lspconfig")
 
 			lspconfig.lua_ls.setup({ capabilities = capabilities })
+      -- list contoh : https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cssls
 		end,
 	},
 }

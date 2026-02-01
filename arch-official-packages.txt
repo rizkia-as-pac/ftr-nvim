@@ -1,0 +1,4 @@
+npm
+neovim
+silicon
+xclip
